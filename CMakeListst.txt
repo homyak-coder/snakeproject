@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.10)
+project(Snake)
+
+#set(MALLOC_CHECK_ "0")
+#-fno-stack-protector
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
+SET(PLATFORM_SPECIFIC_LIBS "-lpthread")
+find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+set(SFML_STATIC_LIBRARIES TRUE)
+
+include_directories(.)
+
+add_executable(Snake
+	main_user.cpp
+	snake/headers/snake_bot.hpp
+	snake/headers/snake_controller.hpp
+	snake/headers/snake_model.hpp
+	snake/headers/snake_shared.hpp
+	snake/headers/snake_view.hpp
+	snake/lib/snake_bot.cpp
+	snake/lib/snake_controller.cpp
+	snake/lib/snake_model.cpp
+	snake/lib/snake_view.cpp)
+
+target_link_libraries(Snake sfml-graphics sfml-window sfml-system -lsfml-graphics -lsfml-window -lsfml-system)
